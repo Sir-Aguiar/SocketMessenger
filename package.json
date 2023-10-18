@@ -1,0 +1,33 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx vitest",
+    "test:ui": "npx vitest --ui",
+    "dev": "tsnd src/index.ts",
+    "start": "node ."
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "websocket": "^1.0.34",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.15",
+    "@types/dotenv": "^8.2.0",
+    "@types/node": "^20.8.6",
+    "@vitest/ui": "^0.34.6",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Felipe Ferreira Aguiar",
+    "email": "felipeferreiraaguiar9@gmail.com",
+    "url": "https://github.com/Sir-Aguiar"
+  },
+  "license": "ISC"
+}
