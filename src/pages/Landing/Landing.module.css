@@ -1,0 +1,27 @@
+.main {
+  @apply w-full h-full;
+  @apply overflow-hidden;
+  @apply flex flex-col items-center justify-center;
+  @apply gap-4;
+  @apply bg-gray-900 text-gray-200;
+}
+
+.types {
+  @apply flex items-center gap-6;
+}
+
+.type {
+  @apply w-[150px] h-[150px];
+  @apply flex flex-col items-center justify-center;
+  @apply gap-3 py-4 px-2;
+  @apply bg-gray-200 rounded-md;
+  @apply uppercase text-gray-900 font-semibold font-mono;
+  @apply cursor-pointer;
+  @apply transition-all duration-300;
+  @apply hover:brightness-95 hover:scale-105;
+}
+
+.type svg {
+  @apply fill-gray-900;
+  @apply w-[50px] h-[50px];
+}

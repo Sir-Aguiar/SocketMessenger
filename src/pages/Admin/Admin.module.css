@@ -1,0 +1,14 @@
+.main {
+  @apply w-full h-full;
+  @apply overflow-hidden;
+  @apply flex flex-col items-center justify-center;
+  @apply gap-4;
+  @apply bg-gray-900 text-gray-200;
+}
+
+.main input, textarea {
+  @apply text-gray-900 font-mono;
+  @apply rounded-[4px];
+  @apply outline-none border-[1px] border-gray-700 border-opacity-60;
+  @apply p-4;
+}
