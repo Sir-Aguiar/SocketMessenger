@@ -12,5 +12,4 @@ const WebSocketServer = new Server({ server: HttpServer });
 ExpressApp.use(cors({ origin: "*" }));
 
 WebSocketServer.on("connection", handleConnection);
-
 export { ExpressApp, HttpServer, WebSocketServer };

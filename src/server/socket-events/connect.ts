@@ -1,9 +1,9 @@
 import { randomUUID } from "crypto";
-import { IncomingMessage } from "http";
 import { SocketActions } from "../../@types";
+import { EmitMessage } from "./emit-message";
 
 let ADMIN_MESSAGE: string | null = null;
-const CLIENTS: WebSocket[] = [];
+let CLIENTS: WebSocket[] = [];
 
 interface ConnectionResponse {
   action: SocketActions;
@@ -11,34 +11,25 @@ interface ConnectionResponse {
   ADMIN_MESSAGE: string | null;
 }
 
-interface EmitMessageResponse {
-  action: SocketActions;
-  ADMIN_MESSAGE: string | null;
-}
-
-function handleConnection(socket: WebSocket, request: IncomingMessage) {
+function handleConnection(socket: WebSocket) {
   const connectionResponse: ConnectionResponse = { action: "CONNECT", sessionID: randomUUID(), ADMIN_MESSAGE };
 
   CLIENTS.push(socket);
 
   socket.onmessage = (event) => {
     const { action, message } = JSON.parse(event.data);
-    console.log();
-    switch (action) {
-      case "EMIT-MESSAGE":
-        ADMIN_MESSAGE = message;
-        console.log(`Mensagem emitida: ${ADMIN_MESSAGE}`);
-        const emitMessageResponse: EmitMessageResponse = { action: "NEW-MESSAGE", ADMIN_MESSAGE };
 
-        CLIENTS.forEach((CLIENT) => {
-          CLIENT.send(JSON.stringify(emitMessageResponse));
-        });
-        break;
-      default:
-        console.log("Action não esperada", event.data);
+    if (action === "EMIT-MESSAGE") {
+      ADMIN_MESSAGE = message;
+      EmitMessage(ADMIN_MESSAGE, CLIENTS);
+      return;
     }
   };
 
+  socket.onclose = (event) => {
+    CLIENTS = CLIENTS.filter((client) => client !== socket);
+  };
+  
   socket.send(JSON.stringify(connectionResponse));
 }
 
