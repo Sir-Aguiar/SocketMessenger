@@ -9,6 +9,10 @@ const ExpressApp = express();
 const HttpServer = createServer(ExpressApp);
 const WebSocketServer = new Server({ server: HttpServer });
 
+ExpressApp.get("/", (req, res) => {
+  res.send("This is working");
+});
+
 ExpressApp.use(cors({ origin: "*" }));
 
 WebSocketServer.on("connection", handleConnection);
